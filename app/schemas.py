@@ -15,3 +15,8 @@ class ExpenseUpdate(BaseModel):
     category: str
     value: float
     description: str
+
+class AccountModel(BaseModel):
+    bank: str
+    acc_type: str
+    active: bool

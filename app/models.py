@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, Boolean, Date, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base  # Modifique aqui
 from sqlalchemy import create_engine
 
@@ -11,6 +11,7 @@ class Account(Base):
     id = Column(Integer, primary_key=True, index=True)
     bank = Column(String, nullable=False)
     acc_type = Column(String, nullable=False)
+    active = Column(Boolean, nullable=False, default=True)
 
     # Relacionamento com Expense (1:N)
     expenses = relationship("Expense", back_populates="account")
@@ -54,6 +55,9 @@ class Investment(Base):
     category = Column(String, nullable=False)
     value = Column(Float, nullable=False)
     description = Column(String, nullable=True)
+    active = Column(Boolean, nullable=False, default=True)
+    refund_date = Column(Date, nullable=True)
+    refund_value = Column(Float, nullable=True)
 
     # Relacionamento com Expense (N:1)
     expense_details = relationship("Expense", back_populates="investments")

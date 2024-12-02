@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.post("/add-expense/")
 async def add_expense(
-    bank_account: str = Form(...),
+    bank_account: int = Form(...),
     date: str = Form(...),
     category: str = Form(...),
     value: float = Form(...),
@@ -27,7 +27,7 @@ async def add_expense(
     db.add(expense)
     db.commit()
     db.refresh(expense)
-    return RedirectResponse("/outs", status_code=303)
+    return RedirectResponse("/expenses", status_code=303)
 
 
 @router.delete("/delete-expense/{expense_id}")
